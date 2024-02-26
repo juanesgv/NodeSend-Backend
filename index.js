@@ -1,9 +1,15 @@
 import express from 'express'
+import conectarDB from './config/db.js'
+import dotenv from 'dotenv'
 
 //creador servidor
 const app = express()
+app.use(express.json())
 
-console.log("comenzando Node Send")
+dotenv.config() //Permite el llamado de las variables de entorno (.env)
+
+//conectar a la bd
+conectarDB()
 
 //puerto de la app
 const port = process.env.PORT || 4000
