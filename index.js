@@ -2,6 +2,7 @@ import express from 'express'
 import conectarDB from './config/db.js'
 import dotenv from 'dotenv'
 import usuarioRoutes from './routes/usuarioRoutes.js'
+import auth from './routes/auth.js'
 
 //creador servidor
 const app = express()
@@ -17,6 +18,7 @@ const port = process.env.PORT || 4000
 
 //creación de usuarios
 app.use('/api/usuarios',usuarioRoutes )
+app.use('/api/auth', auth )
 
 //Arrancar la app
 app.listen(port, '0.0.0.0', ()=>{
