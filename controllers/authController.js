@@ -1,7 +1,6 @@
 import Usuario from "../models/Usuario.js";
 import generarJWT from "../helpers/generarJWT.js";
 import { validationResult } from "express-validator"
-import jwt from "jsonwebtoken"
 
 export const autenticarUsuario = async (req, res, next) => {
 
@@ -14,7 +13,6 @@ export const autenticarUsuario = async (req, res, next) => {
   //Buscar si el usuario está registrado
   const { email, password } = req.body;
   const usuario = await Usuario.findOne({ email });
-  console.log(usuario);
 
   if (!usuario) {
     res.status(401).json({ msg: "No se encontró el usuario" });

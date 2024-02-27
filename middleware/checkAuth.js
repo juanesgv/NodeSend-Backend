@@ -13,16 +13,16 @@ const checkAuth = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.usuario = await Usuario.findById(decoded.id).select(
         "-password -__v"
-      ); //req.usuario es una nueva variable, podria haberlo hecho con un const usuario = ...
+      ); 
       return next();
     } catch (error) {
       return res.status(404).json({ msg: "Hubo un error" });
     }
   }
-  if (!token) {
-    const error = new Error("Token no válido");
-    return res.status(401).json({ msg: error.message });
-  }
+  // if (!token) {
+  //   const error = new Error("Token no válido");
+  //   return res.status(401).json({ msg: error.message });
+  // }
 
   next();
 };

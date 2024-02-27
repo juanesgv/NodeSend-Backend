@@ -3,6 +3,7 @@ import conectarDB from './config/db.js'
 import dotenv from 'dotenv'
 import usuarioRoutes from './routes/usuarioRoutes.js'
 import auth from './routes/auth.js'
+import enlaces from './routes/enlaces.js'
 
 //creador servidor
 const app = express()
@@ -16,9 +17,10 @@ conectarDB()
 //puerto de la app
 const port = process.env.PORT || 4000
 
-//creación de usuarios
+//rutas de la app
 app.use('/api/usuarios',usuarioRoutes )
 app.use('/api/auth', auth )
+app.use('/api/enlaces', enlaces ) 
 
 //Arrancar la app
 app.listen(port, '0.0.0.0', ()=>{
