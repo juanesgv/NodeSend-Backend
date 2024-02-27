@@ -3,6 +3,7 @@ import shortid from "shortid";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import fs from 'fs'
 
 let fileStorage;
 
@@ -40,4 +41,13 @@ export const subirArchivo = async (req, res, next) => {
   });
 };
 
-export const eliminarArchivo = async (req, res) => {};
+export const eliminarArchivo = async (req, res) => {
+    console.log("eliminando archivo")
+
+    try {
+        fs.unlinkSync(__dirname + `/../uploads/${req.archivo}`)
+        console.log('archivo eliminado')
+    } catch (error) {
+        console.log(error)
+    }
+};
