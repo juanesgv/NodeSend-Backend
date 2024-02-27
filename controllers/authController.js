@@ -1,6 +1,7 @@
 import Usuario from "../models/Usuario.js";
 import generarJWT from "../helpers/generarJWT.js";
 import { validationResult } from "express-validator"
+import jwt from "jsonwebtoken"
 
 export const autenticarUsuario = async (req, res, next) => {
 
@@ -35,4 +36,6 @@ export const autenticarUsuario = async (req, res, next) => {
   }
 };
 
-export const usuarioAutenticado = async (req, res) => {};
+export const usuarioAutenticado = async (req, res) => {
+    res.json(req.usuario)
+};
