@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import usuarioRoutes from './routes/usuarioRoutes.js'
 import auth from './routes/auth.js'
 import enlaces from './routes/enlaces.js'
+import archivos from './routes/archivos.js'
 
 //creador servidor
 const app = express()
@@ -21,6 +22,7 @@ const port = process.env.PORT || 4000
 app.use('/api/usuarios',usuarioRoutes )
 app.use('/api/auth', auth )
 app.use('/api/enlaces', enlaces ) 
+app.use('/api/archivos', archivos ) 
 
 //Arrancar la app
 app.listen(port, '0.0.0.0', ()=>{
