@@ -25,6 +25,9 @@ app.use(cors(corsOptions));
 //puerto de la app
 const port = process.env.PORT || 4000;
 
+//habilitar carpeta pública
+app.use(express.static('uploads'))
+
 //rutas de la app
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/auth", auth);

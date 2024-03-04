@@ -4,6 +4,7 @@ import shortid from "shortid";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import fs from 'fs'
+import Enlace from "../models/Enlace.js";
 
 let fileStorage;
 
@@ -51,3 +52,32 @@ export const eliminarArchivo = async (req, res) => {
         console.log(error)
     }
 };
+
+//descarga un archivo
+export const descargarArchivo = async(req, res, next)=>{
+
+  //obtiene el enlace
+  const enlace = await Enlace.findOne({
+    nombre: req.params.archivo
+  })
+
+  const archivoDescarga = `${__dirname}/../uploads/${req.params.archivo}`
+  res.download(archivoDescarga)
+
+  //eliminar archivo y la entrada de la bd
+  const {descargas, nombre} = enlace
+
+    if(descargas === 1) {
+        
+        //eliminar archivo
+        req.archivo = nombre
+
+        //eliminar la entrada de la bd
+        await Enlace.findOneAndDelete({url : enlace.url})
+
+        next()
+    }else{
+        enlace.descargas--
+        await enlace.save()
+    }
+}
