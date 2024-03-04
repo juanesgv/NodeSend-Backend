@@ -40,6 +40,16 @@ export const nuevoEnlace = async (req, res, next) => {
   }
 };
 
+//obtiene un listado de todos los enlaces
+export const todosEnlances = async (req, res) => {
+  try {
+    const enlaces = await Enlace.find({}).select('url -_id')
+    res.json({enlaces})
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 //obtener enlace
 export const obtenerEnlace = async (req,res,next) => {
 
@@ -54,6 +64,8 @@ export const obtenerEnlace = async (req,res,next) => {
     res.json({archivo: enlace.nombre})
 
     const {descargas, nombre} = enlace
+
+    return
 
     if(descargas === 1) {
         
