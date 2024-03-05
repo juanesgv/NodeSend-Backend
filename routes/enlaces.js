@@ -2,7 +2,7 @@ import express from "express";
 import { nuevoEnlace } from "../controllers/enlacesController.js";
 import checkAuth from "../middleware/checkAuth.js";
 import { check } from "express-validator";
-import { obtenerEnlace, todosEnlances } from "../controllers/enlacesController.js";
+import { obtenerEnlace, todosEnlances, verificarPassword } from "../controllers/enlacesController.js";
 
 const router = express.Router();
 
@@ -18,5 +18,7 @@ router.post('/',
 router.get('/', todosEnlances)
 
 router.get('/:url', obtenerEnlace )
+
+router.post('/:url', verificarPassword, obtenerEnlace )
 
 export default router

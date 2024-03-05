@@ -61,8 +61,27 @@ export const obtenerEnlace = async (req,res,next) => {
         return res.status(404).json({msg: "El enlace no existe o ya caducó"})        
     }
 
-    res.json({archivo: enlace.nombre})
-
-    next()
+    if(enlace.password){
+      return res.json({password: true, enlace: enlace.url, archivo: enlace.nombre})
+    }else{
+      res.json({password: false, enlace: enlace.url, archivo: enlace.nombre})
+    }
 
 }
+
+export const verificarPassword = async (req, res, next) => {
+  const {url} = req.params
+  const {password} = req.body
+
+  const enlace = await  await Enlace.findOne({url})
+
+  if(await enlace.comprobarPassword(password)){
+      //si puede descargar archivo
+      next() 
+  }else{
+    return res.status(401).json({msg: 'Contraseña incorrecta'})
+  }
+
+}
+
+

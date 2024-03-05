@@ -42,6 +42,11 @@ enlaceSchema.pre('save', async function(next){
     this.password = await bcrypt.hash(this.password, salt)
 })
 
+//Comprobación de contraseña
+enlaceSchema.methods.comprobarPassword = async function(passwordForm) {
+    return await bcrypt.compare(passwordForm, this.password) //retorna true o false
+}
+
 const Enlace = mongoose.model("Enlace", enlaceSchema)
 
 export default Enlace
